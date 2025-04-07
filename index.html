@@ -85,36 +85,43 @@
 
         /* 섹션 스타일 수정 */
         .section {
-            padding: 100px 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+            padding: 80px 0;
+            position: relative;
         }
 
         .section:first-of-type {
             padding-top: 120px;
-        }
-
-        /* 섹션별 배경색 */
-        #home {
+            min-height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
             background-color: #4a6fa5;
             color: white;
         }
 
-        #about {
-            background-color: #f8f9fa;
+        /* 섹션 구분선 */
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(to right, #4a6fa5, #6a8bbd, #4a6fa5);
+            margin: 0;
+            border: none;
         }
 
-        #projects {
-            background-color: white;
+        /* 섹션 제목 스타일 */
+        .section h2 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+            padding-bottom: 10px;
         }
 
-        #blog {
-            background-color: #f8f9fa;
-        }
-
-        #contact {
-            background-color: white;
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #4a6fa5;
         }
 
         /* 스크롤 진행 표시기 */
@@ -162,13 +169,30 @@
         /* 애니메이션 효과 */
         .fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* 애니메이션 지연 */
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.4s;
         }
 
         /* 반응형 조정 */
@@ -218,16 +242,19 @@
     <!-- 홈 섹션 -->
     <section id="home" class="section">
         <div class="container">
-            <div class="fade-in">
-                <h2>개발자 | 디자이너 | 창작자</h2>
-                <p>안녕하세요! 저는 QATOURI입니다. 이 페이지는 제 포트폴리오와 프로젝트를 소개하는 공간입니다.</p>
-                <div class="hero-buttons">
+            <div>
+                <h2 class="fade-in">개발자 | 디자이너 | 창작자</h2>
+                <p class="fade-in delay-1">안녕하세요! 저는 QATOURI입니다. 이 페이지는 제 포트폴리오와 프로젝트를 소개하는 공간입니다.</p>
+                <div class="hero-buttons fade-in delay-2">
                     <a href="#projects" class="btn primary-btn">프로젝트 보기</a>
                     <a href="#contact" class="btn secondary-btn">연락하기</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- 섹션 구분선 -->
+    <hr class="section-divider">
 
     <!-- 소개 섹션 -->
     <section id="about" class="section">
@@ -276,6 +303,9 @@
             </div>
         </div>
     </section>
+
+    <!-- 섹션 구분선 -->
+    <hr class="section-divider">
 
     <!-- 프로젝트 섹션 -->
     <section id="projects" class="section">
@@ -369,6 +399,9 @@
         </div>
     </section>
 
+    <!-- 섹션 구분선 -->
+    <hr class="section-divider">
+
     <!-- 블로그 섹션 -->
     <section id="blog" class="section">
         <div class="container">
@@ -405,6 +438,9 @@
             </div>
         </div>
     </section>
+
+    <!-- 섹션 구분선 -->
+    <hr class="section-divider">
 
     <!-- 연락처 섹션 -->
     <section id="contact" class="section">
@@ -558,7 +594,7 @@
                 // 현재 섹션 확인 및 네비게이션 활성화
                 let currentSection = '';
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100;
+                    const sectionTop = section.offsetTop - 150;
                     const sectionHeight = section.offsetHeight;
 
                     if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
