@@ -1,0 +1,26 @@
+{
+  "name": "qatouri.github.io",
+  "version": "1.0.0",
+  "description": "이 저장소는 GitHub Pages를 사용하여 호스팅되는 개인 웹사이트입니다.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QATOURI/QATOURI.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/QATOURI/QATOURI.github.io/issues"
+  },
+  "homepage": "https://github.com/QATOURI/QATOURI.github.io#readme",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

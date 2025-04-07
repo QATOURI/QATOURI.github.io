@@ -20,7 +20,7 @@ yarn-error.log*
 /bower_components
 
 # 빌드 디렉토리
-/dist
+# /dist - GitHub Pages에서 사용하기 위해 포함
 /build
 /out
 
