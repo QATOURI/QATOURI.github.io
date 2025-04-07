@@ -3,18 +3,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log('웹사이트가 로드되었습니다!');
     // 현재 연도 업데이트
-    const currentYear = new Date().getFullYear();
-    const footerYear = document.querySelector('footer p');
-    if (footerYear) {
-        footerYear.innerHTML = footerYear.innerHTML.replace('2023', currentYear.toString());
-    }
-    // 프로젝트 카드에 클릭 이벤트 추가
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card) => {
-        card.addEventListener('click', function () {
-            this.classList.toggle('active');
-        });
-    });
+    updateCurrentYear();
+    // 프로젝트 필터링 기능 추가
+    setupProjectFilters();
+    // 연락처 양식 처리
+    setupContactForm();
 });
 // 프로젝트 데이터 예제
 const projects = [
@@ -49,6 +42,59 @@ function renderProjects() {
         projectGrid.appendChild(projectCard);
     });
 }
-// 페이지 로드 시 프로젝트 렌더링
-document.addEventListener('DOMContentLoaded', renderProjects);
+// 현재 연도 업데이트 함수
+function updateCurrentYear() {
+    const currentYear = new Date().getFullYear();
+    const yearElements = document.querySelectorAll('#current-year');
+    yearElements.forEach((element) => {
+        element.textContent = currentYear.toString();
+    });
+}
+// 프로젝트 필터링 기능 설정
+function setupProjectFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    if (filterButtons.length === 0 || projectCards.length === 0)
+        return;
+    filterButtons.forEach((button) => {
+        button.addEventListener('click', function () {
+            // 활성화된 버튼 스타일 변경
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            // 필터 값 가져오기
+            const filterValue = button.getAttribute('data-filter') || 'all';
+            // 프로젝트 필터링
+            projectCards.forEach((card) => {
+                if (filterValue === 'all') {
+                    card.style.display = 'block';
+                }
+                else {
+                    const category = card.getAttribute('data-category') || '';
+                    card.style.display = category === filterValue ? 'block' : 'none';
+                }
+            });
+        });
+    });
+}
+// 연락처 양식 처리
+function setupContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm)
+        return;
+    contactForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        // 양식 데이터 가져오기
+        const formData = new FormData(contactForm);
+        const formValues = {};
+        formData.forEach((value, key) => {
+            formValues[key] = value.toString();
+        });
+        // 실제로는 서버로 데이터를 보내야 하지만, 예제로 콘솔에 출력
+        console.log('양식 제출 데이터:', formValues);
+        // 양식 제출 후 성공 메시지 표시 (실제로는 서버 응답에 따라 처리)
+        alert('메시지가 성공적으로 전송되었습니다!');
+        // 양식 초기화
+        contactForm.reset();
+    });
+}
 //# sourceMappingURL=main.js.map

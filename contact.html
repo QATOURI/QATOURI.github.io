@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QATOURI - 연락처</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>QATOURI</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="about.html">소개</a></li>
+                    <li><a href="projects.html">프로젝트</a></li>
+                    <li><a href="blog.html">블로그</a></li>
+                    <li><a href="contact.html" class="active">연락처</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-page">
+        <div class="container">
+            <h2>연락처</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>연락 정보</h3>
+                    <p>아래 양식을 통해 메시지를 보내거나 다음 연락처로 직접 연락해 주세요:</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-label">이메일:</span>
+                            <a href="mailto:info@qatouri.com">info@qatouri.com</a>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="contact-label">전화번호:</span>
+                            <a href="tel:+821012345678">+82 10-1234-5678</a>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="contact-label">위치:</span>
+                            <span>서울, 대한민국</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-profiles">
+                        <h4>소셜 미디어</h4>
+                        <div class="social-links">
+                            <a href="https://github.com/QATOURI" target="_blank">GitHub</a>
+                            <a href="https://linkedin.com/in/qatouri" target="_blank">LinkedIn</a>
+                            <a href="https://twitter.com/qatouri" target="_blank">Twitter</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>메시지 보내기</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">이메일</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">제목</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">메시지</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn primary-btn">보내기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2023</span> QATOURI. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/QATOURI" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/qatouri" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/qatouri" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="dist/main.js" type="module"></script>
+</body>
+</html>
