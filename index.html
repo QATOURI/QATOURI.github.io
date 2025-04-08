@@ -21,80 +21,129 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#4A6FA5">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3a6ea5',
+              secondary: '#ff6b6b',
+              textColor: '#333',
+              lightText: '#666',
+              bgColor: '#f8f9fa',
+              darkBg: '#121212',
+              darkCard: '#1e1e1e',
+              darkText: '#e0e0e0',
+              darkBorder: '#333',
+            },
+            fontFamily: {
+              sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
+            },
+            boxShadow: {
+              'custom': '0 4px 6px rgba(0, 0, 0, 0.1)',
+              'dark': '0 4px 6px rgba(0, 0, 0, 0.3)',
+            },
+          }
+        }
+      }
+    </script>
+
     <!-- 폰트 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 
     <!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- 스타일시트 -->
+    <!-- 스타일시트 (애니메이션 및 커스텀 스타일용) -->
     <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
     <!-- 스크롤 진행 표시기 -->
-    <div class="scroll-progress"></div>
+    <div class="fixed top-0 left-0 w-0 h-[3px] bg-secondary z-[1001] transition-all duration-100"></div>
 
     <!-- 헤더 -->
-    <header class="transparent">
-        <div class="container">
-            <a href="#" class="logo">QATOURI</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home" class="active">홈</a></li>
-                    <li><a href="#about">소개</a></li>
-                    <li><a href="#projects">프로젝트</a></li>
-                    <li><a href="#contact">연락처</a></li>
+    <header class="fixed top-0 left-0 right-0 z-[1000] bg-transparent transition-all duration-300 dark:bg-darkBg">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-5 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white hover:text-primary transition-all duration-300 dark:text-white">QATOURI</a>
+            <nav class="flex items-center">
+                <ul class="hidden md:flex gap-5">
+                    <li><a href="#home" class="font-medium text-white hover:text-primary transition-all duration-300 py-1 px-3 rounded active dark:text-white dark:hover:text-primary" data-lang-key="nav.home">홈</a></li>
+                    <li><a href="#about" class="font-medium text-white hover:text-primary transition-all duration-300 py-1 px-3 rounded dark:text-white dark:hover:text-primary" data-lang-key="nav.about">소개</a></li>
+                    <li><a href="#projects" class="font-medium text-white hover:text-primary transition-all duration-300 py-1 px-3 rounded dark:text-white dark:hover:text-primary" data-lang-key="nav.projects">프로젝트</a></li>
+                    <li><a href="#contact" class="font-medium text-white hover:text-primary transition-all duration-300 py-1 px-3 rounded dark:text-white dark:hover:text-primary" data-lang-key="nav.contact">연락처</a></li>
                 </ul>
+                <div class="flex items-center ml-6 gap-3">
+                    <!-- 언어 선택 -->
+                    <div class="relative">
+                        <button id="langToggle" class="flex items-center justify-center w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all duration-300 dark:bg-darkCard dark:text-white">
+                            <i class="fas fa-globe"></i>
+                        </button>
+                        <div id="langMenu" class="absolute right-0 mt-2 w-24 bg-white rounded-md shadow-lg py-1 z-10 hidden dark:bg-darkCard">
+                            <button class="lang-option block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-darkText dark:hover:bg-darkBorder" data-lang="ko">한국어</button>
+                            <button class="lang-option block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-darkText dark:hover:bg-darkBorder" data-lang="en">English</button>
+                        </div>
+                    </div>
+                    <!-- 다크 모드 토글 -->
+                    <button id="themeToggle" class="flex items-center justify-center w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all duration-300 dark:bg-darkCard dark:text-white">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                </div>
             </nav>
-            <button class="mobile-menu-btn">☰</button>
+            <button class="md:hidden text-2xl text-white dark:text-white">☰</button>
         </div>
     </header>
 
     <!-- 홈 섹션 -->
-    <section id="home" class="section hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title fade-in">안녕하세요, <br>저는 <span class="highlight">QATOURI</span>입니다</h1>
-                <p class="hero-subtitle fade-in delay-1">언어전문가 | 창작자 | 개발자</p>
-                <div class="hero-buttons fade-in delay-2">
-                    <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
-                    <a href="#contact" class="btn btn-secondary">연락하기</a>
+    <section id="home" class="h-screen flex items-center py-20 relative overflow-hidden bg-gradient-to-br from-primary to-[#2c4162] text-white dark:bg-gradient-to-br dark:from-darkBg dark:to-black">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80')] bg-center bg-no-repeat bg-cover opacity-15 z-0 dark:opacity-10"></div>
+        <div class="w-[90%] max-w-[1200px] mx-auto px-5 relative z-10">
+            <div class="max-w-[800px]">
+                <h1 class="text-5xl md:text-6xl font-bold mb-5 leading-tight opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in dark:text-white" data-lang-key="hero.greeting">안녕하세요, <br>저는 <span class="text-white dark:text-white">QATOURI</span>입니다</h1>
+                <p class="text-2xl md:text-3xl mb-8 opacity-90 opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out delay-100 fade-in dark:text-white" data-lang-key="hero.title">언어전문가 | 창작자 | 개발자</p>
+                <div class="flex flex-col sm:flex-row gap-4 mt-8 opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out delay-200 fade-in">
+                    <a href="#projects" class="inline-block py-3 px-6 rounded font-semibold transition-all duration-300 cursor-pointer bg-white text-primary hover:bg-gray-100 hover:-translate-y-1 dark:bg-darkCard dark:text-primary dark:hover:bg-darkBorder" data-lang-key="hero.projectsBtn">프로젝트 보기</a>
+                    <a href="#contact" class="inline-block py-3 px-6 rounded font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white border-2 border-white hover:bg-white/10 hover:-translate-y-1 dark:border-white" data-lang-key="hero.contactBtn">연락하기</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 소개 섹션 -->
-    <section id="about" class="section about">
-        <div class="container">
-            <h2 class="section-title fade-in">소개</h2>
-            <div class="about-content">
-                <div class="about-image fade-in">
-                    <img src="https://via.placeholder.com/400" alt="QATOURI 프로필 이미지">
+    <section id="about" class="py-20 bg-white dark:bg-darkBg">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-5">
+            <h2 class="text-4xl mb-12 text-center relative text-primary opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in dark:text-white" data-lang-key="about.title">소개</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+                <div class="md:col-span-1 relative opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in">
+                    <img src="https://via.placeholder.com/400" alt="QATOURI 프로필 이미지" class="w-full rounded-lg shadow-lg relative z-10 dark:shadow-dark">
+                    <div class="absolute top-[-15px] left-[-15px] w-full h-full border-3 border-primary rounded-lg z-0 dark:border-primary/70"></div>
                 </div>
-                <div class="about-text">
-                    <h3 class="fade-in">안녕하세요, QATOURI입니다!</h3>
-                    <p class="fade-in delay-1">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl mb-5 text-primary opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in dark:text-primary" data-lang-key="about.greeting">안녕하세요, QATOURI입니다!</h3>
+                    <p class="mb-5 text-lightText text-lg opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out delay-100 fade-in dark:text-darkText" data-lang-key="about.bio1">
                         저는 언어학자(Linguist), 창작자(Creator), 개발자(Developer)로서 다양한 분야에서 활동하고 있습니다.
                         언어의 구조와 패턴을 분석하고, 창의적인 콘텐츠를 제작하며, 혁신적인 소프트웨어 솔루션을 개발합니다.
                     </p>
-                    <p class="fade-in delay-2">
+                    <p class="mb-5 text-lightText text-lg opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out delay-200 fade-in dark:text-darkText" data-lang-key="about.bio2">
                         언어학적 배경과 창의적 사고를 결합하여 사용자 경험을 향상시키는 웹 애플리케이션을 개발하는 데 집중하고 있습니다.
                         언어와 코드의 교차점에서 특별한 통찰력을 발휘합니다.
                     </p>
 
-                    <div class="skills fade-in delay-3">
-                        <h4 class="skills-title">기술 스택</h4>
-                        <div class="skills-list">
-                            <span class="skill-item">HTML5</span>
-                            <span class="skill-item">CSS3</span>
-                            <span class="skill-item">JavaScript</span>
-                            <span class="skill-item">TypeScript</span>
-                            <span class="skill-item">React</span>
-                            <span class="skill-item">Node.js</span>
-                            <span class="skill-item">Git</span>
-                            <span class="skill-item">NLP</span>
-                            <span class="skill-item">콘텐츠 제작</span>
+                    <div class="mt-8 opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out delay-300 fade-in">
+                        <h4 class="text-xl mb-4 text-primary dark:text-primary" data-lang-key="about.skills">기술 스택</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">HTML5</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">CSS3</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">JavaScript</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">TypeScript</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">React</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">Node.js</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">Git</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark">NLP</span>
+                            <span class="bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:bg-primary/80 dark:shadow-dark" data-lang-key="about.skill.content">콘텐츠 제작</span>
                         </div>
                     </div>
                 </div>
@@ -103,59 +152,59 @@
     </section>
 
     <!-- 프로젝트 섹션 -->
-    <section id="projects" class="section projects">
-        <div class="container">
-            <h2 class="section-title fade-in">프로젝트</h2>
+    <section id="projects" class="py-20 bg-bgColor dark:bg-darkBg">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-5">
+            <h2 class="text-4xl mb-12 text-center relative text-primary opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in dark:text-white" data-lang-key="projects.title">프로젝트</h2>
 
-            <div class="project-filters fade-in">
-                <button class="filter-btn active" data-filter="all">전체</button>
-                <button class="filter-btn" data-filter="linguistics">언어학</button>
-                <button class="filter-btn" data-filter="creative">창작</button>
-                <button class="filter-btn" data-filter="dev">개발</button>
+            <div class="flex justify-center gap-4 mb-10 flex-wrap opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in">
+                <button class="bg-white border-none py-2 px-4 rounded-full cursor-pointer transition-all duration-300 font-medium hover:bg-primary hover:text-white active dark:bg-darkCard dark:text-darkText dark:hover:bg-primary dark:hover:text-white" data-lang-key="projects.filter.all">전체</button>
+                <button class="bg-white border-none py-2 px-4 rounded-full cursor-pointer transition-all duration-300 font-medium hover:bg-primary hover:text-white dark:bg-darkCard dark:text-darkText dark:hover:bg-primary dark:hover:text-white" data-lang-key="projects.filter.linguistics">언어학</button>
+                <button class="bg-white border-none py-2 px-4 rounded-full cursor-pointer transition-all duration-300 font-medium hover:bg-primary hover:text-white dark:bg-darkCard dark:text-darkText dark:hover:bg-primary dark:hover:text-white" data-lang-key="projects.filter.creative">창작</button>
+                <button class="bg-white border-none py-2 px-4 rounded-full cursor-pointer transition-all duration-300 font-medium hover:bg-primary hover:text-white dark:bg-darkCard dark:text-darkText dark:hover:bg-primary dark:hover:text-white" data-lang-key="projects.filter.dev">개발</button>
             </div>
 
-            <div class="projects-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 프로젝트 1 -->
-                <div class="project-card fade-in" data-category="dev">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="포트폴리오 웹사이트">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/QATOURI/QATOURI.github.io" target="_blank"><i class="fab fa-github"></i></a>
-                                <a href="https://qatouri.github.io" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-lg opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in dark:bg-darkCard dark:shadow-dark">
+                    <div class="relative overflow-hidden">
+                        <img src="https://via.placeholder.com/600x400" alt="포트폴리오 웹사이트" class="w-full h-[200px] object-cover transition-all duration-300 hover:scale-105">
+                        <div class="absolute inset-0 bg-primary/80 flex justify-center items-center opacity-0 transition-all duration-300 hover:opacity-100">
+                            <div class="flex gap-4">
+                                <a href="https://github.com/QATOURI/QATOURI.github.io" target="_blank" class="w-10 h-10 bg-white text-primary rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 dark:bg-darkCard"><i class="fab fa-github"></i></a>
+                                <a href="https://qatouri.github.io" target="_blank" class="w-10 h-10 bg-white text-primary rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 dark:bg-darkCard"><i class="fas fa-external-link-alt"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>포트폴리오 웹사이트</h3>
-                        <p>GitHub Pages를 사용하여 개발한 개인 포트폴리오 웹사이트입니다.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
-                            <span class="project-tag">TypeScript</span>
+                    <div class="p-5">
+                        <h3 class="text-xl mb-2 text-primary dark:text-primary" data-lang-key="projects.portfolio.title">포트폴리오 웹사이트</h3>
+                        <p class="text-lightText mb-4 dark:text-darkText" data-lang-key="projects.portfolio.desc">GitHub Pages를 사용하여 개발한 개인 포트폴리오 웹사이트입니다.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-bgColor py-1 px-2 rounded text-sm text-lightText dark:bg-darkBorder dark:text-darkText">HTML</span>
+                            <span class="bg-bgColor py-1 px-2 rounded text-sm text-lightText dark:bg-darkBorder dark:text-darkText">CSS</span>
+                            <span class="bg-bgColor py-1 px-2 rounded text-sm text-lightText dark:bg-darkBorder dark:text-darkText">JavaScript</span>
+                            <span class="bg-bgColor py-1 px-2 rounded text-sm text-lightText dark:bg-darkBorder dark:text-darkText">TypeScript</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 프로젝트 2 -->
-                <div class="project-card fade-in delay-1" data-category="linguistics">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="언어 분석 도구">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-lg opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out delay-100 fade-in dark:bg-darkCard dark:shadow-dark">
+                    <div class="relative overflow-hidden">
+                        <img src="https://via.placeholder.com/600x400" alt="언어 분석 도구" class="w-full h-[200px] object-cover transition-all duration-300 hover:scale-105">
+                        <div class="absolute inset-0 bg-primary/80 flex justify-center items-center opacity-0 transition-all duration-300 hover:opacity-100">
+                            <div class="flex gap-4">
+                                <a href="#" target="_blank" class="w-10 h-10 bg-white text-primary rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 dark:bg-darkCard"><i class="fab fa-github"></i></a>
+                                <a href="#" target="_blank" class="w-10 h-10 bg-white text-primary rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 dark:bg-darkCard"><i class="fas fa-external-link-alt"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>언어 분석 도구</h3>
-                        <p>자연어 처리 기술을 활용한 텍스트 분석 및 언어 패턴 식별 도구입니다.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Python</span>
-                            <span class="project-tag">NLP</span>
-                            <span class="project-tag">언어학</span>
+                    <div class="p-5">
+                        <h3 class="text-xl mb-2 text-primary dark:text-primary" data-lang-key="projects.nlp.title">언어 분석 도구</h3>
+                        <p class="text-lightText mb-4 dark:text-darkText" data-lang-key="projects.nlp.desc">자연어 처리 기술을 활용한 텍스트 분석 및 언어 패턴 식별 도구입니다.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-bgColor py-1 px-2 rounded text-sm text-lightText dark:bg-darkBorder dark:text-darkText">Python</span>
+                            <span class="bg-bgColor py-1 px-2 rounded text-sm text-lightText dark:bg-darkBorder dark:text-darkText">NLP</span>
+                            <span class="bg-bgColor py-1 px-2 rounded text-sm text-lightText dark:bg-darkBorder dark:text-darkText" data-lang-key="projects.tag.linguistics">언어학</span>
                         </div>
                     </div>
                 </div>
@@ -164,76 +213,76 @@
     </section>
 
     <!-- 연락처 섹션 -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <h2 class="section-title fade-in">연락처</h2>
+    <section id="contact" class="py-20 bg-white dark:bg-darkBg">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-5">
+            <h2 class="text-4xl mb-12 text-center relative text-primary opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in dark:text-white" data-lang-key="contact.title">연락처</h2>
 
-            <div class="contact-content">
-                <div class="contact-info fade-in">
-                    <h3>연락 정보</h3>
-                    <p>아래 양식을 통해 메시지를 보내거나 다음 연락처로 직접 연락해 주세요:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out fade-in">
+                    <h3 class="text-2xl mb-5 text-primary dark:text-primary" data-lang-key="contact.info">연락 정보</h3>
+                    <p class="mb-8 text-lightText dark:text-darkText" data-lang-key="contact.desc">아래 양식을 통해 메시지를 보내거나 다음 연락처로 직접 연락해 주세요:</p>
 
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center mr-4 dark:bg-primary/80">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <div class="contact-text">
-                                <a href="mailto:info@qatouri.com">info@qatouri.com</a>
+                            <div class="text-lightText dark:text-darkText">
+                                <a href="mailto:info@qatouri.com" class="text-primary hover:underline transition-all duration-300 dark:text-primary">info@qatouri.com</a>
                             </div>
                         </div>
 
-                        <div class="contact-item">
-                            <div class="contact-icon">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center mr-4 dark:bg-primary/80">
                                 <i class="fas fa-phone"></i>
                             </div>
-                            <div class="contact-text">
-                                <a href="tel:+821012345678">+82 10-1234-5678</a>
+                            <div class="text-lightText dark:text-darkText">
+                                <a href="tel:+821012345678" class="text-primary hover:underline transition-all duration-300 dark:text-primary">+82 10-1234-5678</a>
                             </div>
                         </div>
 
-                        <div class="contact-item">
-                            <div class="contact-icon">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center mr-4 dark:bg-primary/80">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="contact-text">
-                                <span>서울, 대한민국</span>
+                            <div class="text-lightText dark:text-darkText">
+                                <span data-lang-key="contact.location">서울, 대한민국</span>
                             </div>
                         </div>
                     </div>
 
-                    <h4>소셜 미디어</h4>
-                    <div class="social-links">
-                        <a href="https://github.com/QATOURI" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/qatouri" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://twitter.com/qatouri" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <h4 class="text-xl mb-4 text-primary dark:text-primary" data-lang-key="contact.social">소셜 미디어</h4>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/QATOURI" target="_blank" class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#2c4162] dark:bg-primary/80"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/qatouri" target="_blank" class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#2c4162] dark:bg-primary/80"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com/qatouri" target="_blank" class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#2c4162] dark:bg-primary/80"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
 
-                <div class="contact-form fade-in delay-1">
-                    <h3>메시지 보내기</h3>
+                <div class="bg-white p-8 rounded-lg shadow-md opacity-0 transform translate-y-8 transition-all duration-800 ease-in-out delay-100 fade-in dark:bg-darkCard dark:shadow-dark">
+                    <h3 class="text-2xl mb-5 text-primary dark:text-primary" data-lang-key="contact.form.title">메시지 보내기</h3>
                     <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">이름</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                        <div class="mb-5">
+                            <label for="name" class="block mb-2 font-medium text-textColor dark:text-darkText" data-lang-key="contact.form.name">이름</label>
+                            <input type="text" id="name" name="name" class="w-full py-3 px-3 border border-gray-300 rounded font-inherit text-base transition-all duration-300 focus:outline-none focus:border-primary dark:bg-darkBg dark:border-darkBorder dark:text-white" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">이메일</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                        <div class="mb-5">
+                            <label for="email" class="block mb-2 font-medium text-textColor dark:text-darkText" data-lang-key="contact.form.email">이메일</label>
+                            <input type="email" id="email" name="email" class="w-full py-3 px-3 border border-gray-300 rounded font-inherit text-base transition-all duration-300 focus:outline-none focus:border-primary dark:bg-darkBg dark:border-darkBorder dark:text-white" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="subject">제목</label>
-                            <input type="text" id="subject" name="subject" class="form-control" required>
+                        <div class="mb-5">
+                            <label for="subject" class="block mb-2 font-medium text-textColor dark:text-darkText" data-lang-key="contact.form.subject">제목</label>
+                            <input type="text" id="subject" name="subject" class="w-full py-3 px-3 border border-gray-300 rounded font-inherit text-base transition-all duration-300 focus:outline-none focus:border-primary dark:bg-darkBg dark:border-darkBorder dark:text-white" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="message">메시지</label>
-                            <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+                        <div class="mb-5">
+                            <label for="message" class="block mb-2 font-medium text-textColor dark:text-darkText" data-lang-key="contact.form.message">메시지</label>
+                            <textarea id="message" name="message" rows="5" class="w-full py-3 px-3 border border-gray-300 rounded font-inherit text-base transition-all duration-300 focus:outline-none focus:border-primary dark:bg-darkBg dark:border-darkBorder dark:text-white" required></textarea>
                         </div>
 
-                        <button type="submit" class="form-btn">보내기</button>
+                        <button type="submit" class="w-full bg-primary text-white border-none py-3 px-6 rounded font-semibold cursor-pointer transition-all duration-300 hover:bg-[#2c4162] dark:bg-primary/80" data-lang-key="contact.form.submit">보내기</button>
                     </form>
                 </div>
             </div>
@@ -241,19 +290,19 @@
     </section>
 
     <!-- 푸터 -->
-    <footer>
-        <div class="container">
-            <p>&copy; <span class="current-year">2023</span> QATOURI. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/QATOURI" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/qatouri" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://twitter.com/qatouri" target="_blank"><i class="fab fa-twitter"></i></a>
+    <footer class="bg-[#2c4162] text-white py-8 text-center dark:bg-black">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-5 flex flex-col items-center">
+            <p class="mb-4">&copy; <span class="current-year">2023</span> QATOURI. <span data-lang-key="footer.rights">All rights reserved.</span></p>
+            <div class="flex gap-4">
+                <a href="https://github.com/QATOURI" target="_blank" class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#3a6ea5] dark:bg-primary/80"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/qatouri" target="_blank" class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#3a6ea5] dark:bg-primary/80"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com/qatouri" target="_blank" class="w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#3a6ea5] dark:bg-primary/80"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </footer>
 
     <!-- 스크롤 탑 버튼 -->
-    <div class="scroll-top">
+    <div class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full flex justify-center items-center cursor-pointer opacity-0 invisible transition-all duration-300 z-50 shadow-md hover:bg-[#2c4162] hover:-translate-y-1 scroll-top dark:bg-primary/80 dark:shadow-dark">
         <i class="fas fa-arrow-up"></i>
     </div>
 
@@ -285,6 +334,7 @@
     </script>
 
     <!-- 자바스크립트 -->
+    <script src="translations.js"></script>
     <script src="portfolio.js"></script>
 </body>
 </html>
