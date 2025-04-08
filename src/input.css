@@ -7,48 +7,48 @@
   .container {
     @apply w-[90%] max-w-[1200px] mx-auto px-5;
   }
-  
+
   .section {
     @apply py-20 relative;
   }
-  
+
   .section-title {
     @apply text-4xl mb-12 text-center relative text-primary;
   }
-  
+
   .section-title::after {
     content: '';
     @apply absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[50px] h-[3px] bg-primary;
   }
-  
+
   .btn {
     @apply inline-block py-3 px-6 rounded font-semibold transition-all duration-300 cursor-pointer;
   }
-  
+
   .btn-primary {
     @apply bg-white text-primary hover:bg-gray-100 hover:translate-y-[-3px];
   }
-  
+
   .btn-secondary {
     @apply bg-transparent text-white border-2 border-white hover:bg-white/10 hover:translate-y-[-3px];
   }
-  
+
   .skill-item {
     @apply bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300 hover:translate-y-[-3px] hover:shadow-custom;
   }
-  
+
   .project-card {
     @apply bg-white rounded-lg overflow-hidden shadow-custom transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg;
   }
-  
+
   .form-control {
-    @apply w-full py-3 px-3 border border-gray-300 rounded font-inherit text-base transition-all duration-300 focus:outline-none focus:border-primary;
+    @apply w-full py-3 px-3 border border-gray-300 rounded font-sans text-base transition-all duration-300 focus:outline-none focus:border-primary;
   }
-  
+
   .form-btn {
     @apply bg-primary text-white border-none py-3 px-6 rounded font-semibold cursor-pointer transition-all duration-300 w-full hover:bg-[#2c4162];
   }
-  
+
   .social-links a {
     @apply w-10 h-10 bg-primary text-white rounded-full flex justify-center items-center transition-all duration-300 hover:translate-y-[-3px] hover:bg-[#2c4162];
   }
