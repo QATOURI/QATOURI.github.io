@@ -9,8 +9,10 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "sourceMap": true
+    "sourceMap": true,
+    "allowJs": true,
+    "checkJs": true
   },
-  "include": ["src/script.js"],
+  "include": ["src/script.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
