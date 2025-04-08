@@ -1,6 +1,5 @@
 // 페이지가 로드되면 실행
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('웹사이트가 로드되었습니다!');
     
     // 현재 연도 업데이트
     const currentYear = new Date().getFullYear();
