@@ -29,3 +29,10 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# 백업 파일
+*-backup.html
+*-old.html
+*-updated.html
+*-new.html
+github.com/
