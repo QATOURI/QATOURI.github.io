@@ -30,9 +30,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# 백업 파일
-*-backup.html
-*-old.html
-*-updated.html
-*-new.html
+# 백업 및 참조용 파일
+index-developer-designer.html
+index-multipage.html
+index-refactored.html
+index-linguist-creator-developer-en.html
 github.com/
